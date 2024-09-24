@@ -75,7 +75,7 @@ document.getElementById('groupForm').addEventListener('submit', function(event) 
     document.getElementById('groupForm').reset();
 });
 
-    // Visa grupper
+  // Visa grupper
 document.addEventListener('DOMContentLoaded', function() {
     const groupListElement = document.getElementById('groupList');
     const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
