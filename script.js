@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault(); // Förhindra att sidan laddas om
 
             const email = document.getElementById('email').value;
-            localStorage.setItem('loggedInUser', email);
+            localStorage.setItem('loggedInUser', email); // Spara användarens e-post i localStorage
 
-            // Omdirigera till dashboard
-            window.location.href = 'dashboard.html'; // Omdirigera till dashboard
+            // Omdirigera till skapa grupp-sidan
+            window.location.href = 'create-group.html'; // Ändrat till create-group.html
         });
     }
 
@@ -22,9 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const groupName = document.getElementById('groupName').value;
             const loggedInUser = localStorage.getItem('loggedInUser'); // Hämta den inloggade användarens e-post
 
-            console.log('Gruppnamn:', groupName); // Kontrollera värdet
-            console.log('Inloggad användare:', loggedInUser); // Kontrollera värdet
-
             const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
             const newGroup = {
                 name: groupName,
@@ -32,9 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             existingGroups.push(newGroup);
             localStorage.setItem('groups', JSON.stringify(existingGroups));
-
-            console.log('Skapar grupp:', newGroup);
-            console.log('Alla grupper:', existingGroups);
 
             // Omdirigera till grupplistan
             window.location.href = 'group-list.html'; // Omdirigera till grupplista
