@@ -4,21 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gruppdetaljer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1 id="groupTitle"></h1>
-    <button onclick="window.location.href='group-list.html'">Tillbaka</button>
+    <h1>Gruppdetaljer</h1>
+    <h2 id="groupName"></h2>
 
-    <h2>Lägg till träningspass</h2>
-    <form id="trainingSessionForm">
-        <label for="sessionName">Träningspassets namn:</label>
-        <input type="text" id="sessionName" required>
-        <button type="submit">Lägg till pass</button>
+    <h3>Lägg till träningspass</h3>
+    <form id="trainingForm">
+        <label for="trainingDate">Datum:</label>
+        <input type="date" id="trainingDate" required>
+        <button type="submit">Skapa träningspass</button>
     </form>
+    
+    <h2>Träningspass för grupp: <span id="groupNameDetail"></span></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Grupp</th>
+                <th>Skapad av</th>
+            </tr>
+        </thead>
+        <tbody id="trainingList"></tbody>
+    </table>
 
-    <h2>Träningspass</h2>
-    <ul id="sessionList"></ul>
+    <button onclick="goBack()">Tillbaka</button>
 
-    <script src="group-detail.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
