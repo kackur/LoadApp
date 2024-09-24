@@ -64,4 +64,52 @@ document.addEventListener('DOMContentLoaded', function() {
             groupListElement.appendChild(row);
         });
     }
+
+    // Visa gruppdetaljer och lägg till träningspass
+    const trainingSessionForm = document.getElementById('trainingSessionForm');
+    if (trainingSessionForm) {
+        const currentGroupIndex = localStorage.getItem('currentGroupIndex');
+        const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
+        const currentGroup = existingGroups[currentGroupIndex];
+
+        if (currentGroup) {
+            document.getElementById('groupName').textContent = currentGroup.name; // Visa gruppnamnet
+
+            trainingSessionForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Förhindra att sidan laddas om
+
+                const sessionDate = document.getElementById('sessionDate').value;
+                const sessionDescription = document.getElementById('sessionDescription').value;
+
+                // Skapa träningspassobjekt
+                const trainingSession = {
+                    date: sessionDate,
+                    description: sessionDescription
+                };
+
+                // Spara träningspass i localStorage
+                const trainingSessions = JSON.parse(localStorage.getItem('trainingSessions')) || {};
+                trainingSessions[currentGroupIndex] = trainingSessions[currentGroupIndex] || [];
+                trainingSessions[currentGroupIndex].push(trainingSession);
+                localStorage.setItem('trainingSessions', JSON.stringify(trainingSessions));
+
+                // Rensa formuläret
+                trainingSessionForm.reset();
+                alert('Träningspass tillagt!');
+            });
+
+            // Visa befintliga träningspass
+            const trainingSessionsListElement = document.getElementById('trainingSessionsList');
+            if (trainingSessionsListElement) {
+                const trainingSessions = JSON.parse(localStorage.getItem('trainingSessions')) || {};
+                const currentGroupSessions = trainingSessions[currentGroupIndex] || [];
+
+                currentGroupSessions.forEach(session => {
+                    const sessionItem = document.createElement('li');
+                    sessionItem.textContent = `Datum: ${session.date}, Beskrivning: ${session.description}`;
+                    trainingSessionsListElement.appendChild(sessionItem);
+                });
+            }
+        }
+    }
 });
