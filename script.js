@@ -1,10 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Kontrollera om användaren är inloggad
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (!loggedInUser) {
-        window.location.href = 'index.html'; // Om inte inloggad, omdirigera till index
-    }
-
     // Skapa konto
     const createAccountForm = document.getElementById('createAccountForm');
     if (createAccountForm) {
@@ -36,12 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
             existingGroups.push(newGroup);
             localStorage.setItem('groups', JSON.stringify(existingGroups));
 
-            // Omdirigera till dashboard efter att ha skapat grupp
-            window.location.href = 'dashboard.html'; // Omdirigera till dashboard
+            // Omdirigera till grupplistan
+            window.location.href = 'group-list.html'; // Omdirigera till grupplista
         });
     }
 
-    // Visa grupper på dashboard
+    // Visa grupper på dashboard och group-list
     const groupListElement = document.getElementById('groupList');
     if (groupListElement) {
         const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
