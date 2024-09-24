@@ -49,20 +49,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Skapa träningsgrupp
-    document.getElementById('groupForm')?.addEventListener('submit', function(event) {
-        event.preventDefault(); // Förhindra att sidan laddas om
+document.getElementById('groupForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Förhindra att sidan laddas om
 
-        const groupName = document.getElementById('groupName').value;
+    const groupName = document.getElementById('groupName').value;
+    const loggedInUser = localStorage.getItem('loggedInUser'); // Hämta den inloggade användarens e-post
 
-        // Hämta befintliga grupper från localStorage
-        let groups = JSON.parse(localStorage.getItem('trainingGroups')) || [];
-        
-        // Lägg till den nya gruppen
-        groups.push(groupName);
-        
-        // Spara tillbaka till localStorage
-        localStorage.setItem('trainingGroups', JSON.stringify(groups));
-        
-        document.getElementById('groupMessage').innerText = `Träningsgrupp "${groupName}" skapad!`;
-    });
+    // Skapa en ny grupp i localStorage
+    const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
+    const newGroup = {
+        name: groupName,
+        createdBy: loggedInUser // Spara den inloggade användarens e-post
+    };
+    existingGroups.push(newGroup);
+    localStorage.setItem('groups', JSON.stringify(existingGroups));
+
+    // Visa bekräftelse
+    document.getElementById('message').innerText = `Grupp "${groupName}" skapad av ${loggedInUser}!`;
+
+    // Rensa formuläret
+    document.getElementById('groupForm').reset();
+});
 });
