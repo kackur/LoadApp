@@ -4,10 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoadApp - Grupper</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .new-group-button, .back-button {
+            margin: 10px 0;
+            padding: 10px 15px;
+        }
+        .new-group-button {
+            float: right;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lista över Grupper</h1>
-    <ul id="groupList"></ul>
+    <h1>Grupplista</h1>
+
+    <button class="new-group-button" onclick="window.location.href='create-group.html'">Ny Grupp</button>
+    <button class="back-button" onclick="window.location.href='dashboard.html'">Tillbaka till Dashboard</button>
+
+    <h2>Lista över grupper</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Gruppens namn</th>
+                <th>Skapad av</th>
+            </tr>
+        </thead>
+        <tbody id="groupList"></tbody>
+    </table>
+
     <script src="script.js"></script>
 </body>
 </html>
