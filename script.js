@@ -1,118 +1,58 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Skapa konto
-    const createAccountForm = document.getElementById('createAccountForm');
-    if (createAccountForm) {
-        createAccountForm.addEventListener('submit', function(event) {
+    // Hämta gruppnamn från URL eller Local Storage och visa det
+    const groupName = localStorage.getItem('selectedGroupName') || "Ingen grupp vald";
+    document.getElementById('groupNameHeader').textContent = groupName;
+    document.getElementById('groupName').value = groupName; // Dölja gruppnamn i formuläret
+
+    // Skapa träningspass
+    const trainingSessionForm = document.getElementById('trainingSessionForm');
+    if (trainingSessionForm) {
+        trainingSessionForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Förhindra att sidan laddas om
 
-            const email = document.getElementById('email').value;
-            localStorage.setItem('loggedInUser', email); // Spara användarens e-post i localStorage
+            const sessionName = document.getElementById('sessionName').value; // Hämta träningspass namn
+            const sessionDate = document.getElementById('sessionDate').value; // Hämta datum
+            const groupName = document.getElementById('groupName').value; // Hämta gruppnamn
 
-            // Omdirigera till skapa grupp-sidan
-            window.location.href = 'create-group.html'; // Ändrat till create-group.html
+            if (sessionName && sessionDate && groupName) {
+                const existingSessions = JSON.parse(localStorage.getItem('trainingSessions')) || [];
+                const newSession = {
+                    name: sessionName,
+                    date: sessionDate,
+                    group: groupName,
+                    createdBy: localStorage.getItem('loggedInUser') // Hämta inloggad användare
+                };
+                existingSessions.push(newSession);
+                localStorage.setItem('trainingSessions', JSON.stringify(existingSessions));
+
+                // Visa träningspass
+                loadTrainingSessions();
+                trainingSessionForm.reset(); // Återställ formuläret
+            } else {
+                console.error('Något värde saknas!');
+            }
         });
     }
 
-    // Skapa träningsgrupp
-    const groupForm = document.getElementById('groupForm');
-    if (groupForm) {
-        groupForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Förhindra att sidan laddas om
+    // Visa träningspass
+    loadTrainingSessions();
 
-            const groupName = document.getElementById('groupName').value;
-            const loggedInUser = localStorage.getItem('loggedInUser'); // Hämta den inloggade användarens e-post
+    function loadTrainingSessions() {
+        const sessionsList = document.getElementById('sessionsList');
+        sessionsList.innerHTML = ''; // Rensa befintliga poster
 
-            const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
-            const newGroup = {
-                name: groupName,
-                createdBy: loggedInUser // Spara den inloggade användarens e-post
-            };
-            existingGroups.push(newGroup);
-            localStorage.setItem('groups', JSON.stringify(existingGroups));
-
-            // Omdirigera till grupplistan
-            window.location.href = 'group-list.html'; // Omdirigera till grupplista
-        });
-    }
-
-    // Visa grupper
-    const groupListElement = document.getElementById('groupList');
-    if (groupListElement) {
-        const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
-        
-        existingGroups.forEach((group, index) => {
-            const listItem = document.createElement('tr');
-            listItem.innerHTML = `
-                <td>${group.name}</td>
-                <td>${group.createdBy}</td>
-                <td><button onclick="viewGroup(${index})">Visa</button></td>
-            `;
-            groupListElement.appendChild(listItem);
-        });
-    }
-
-    // Visa gruppnamn
-    const selectedGroup = JSON.parse(localStorage.getItem('selectedGroup'));
-    if (selectedGroup) {
-        document.getElementById('groupName').textContent = `Grupp: ${selectedGroup.name}`;
-        document.getElementById('groupNameDetail').textContent = selectedGroup.name;
-    }
-
-    // Lägg till träningspass
-    const trainingForm = document.getElementById('trainingForm');
-    if (trainingForm) {
-        trainingForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Förhindra att sidan laddas om
-
-            const trainingDate = document.getElementById('trainingDate').value;
-            const loggedInUser = localStorage.getItem('loggedInUser');
-
-            const existingTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-            const newTraining = {
-                date: trainingDate,
-                groupName: selectedGroup.name,
-                createdBy: loggedInUser
-            };
-            existingTrainings.push(newTraining);
-            localStorage.setItem('trainings', JSON.stringify(existingTrainings));
-
-            // Ladda träningspass
-            loadTrainings();
-        });
-    }
-
-    // Ladda träningspass
-    loadTrainings();
-
-    function loadTrainings() {
-        const trainingListElement = document.getElementById('trainingList');
-        trainingListElement.innerHTML = ''; // Töm tidigare listning
-
-        const existingTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-        
-        existingTrainings.forEach(training => {
-            if (training.groupName === selectedGroup.name) {
+        const existingSessions = JSON.parse(localStorage.getItem('trainingSessions')) || [];
+        existingSessions.forEach(session => {
+            if (session.group === groupName) {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${training.date}</td>
-                    <td>${training.groupName}</td>
-                    <td>${training.createdBy}</td>
+                    <td>${session.name}</td>
+                    <td>${session.date}</td>
+                    <td>${session.group}</td>
+                    <td>${session.createdBy}</td>
                 `;
-                trainingListElement.appendChild(row);
+                sessionsList.appendChild(row);
             }
         });
     }
 });
-
-// Navigera tillbaka till dashboard
-function goBack() {
-    window.location.href = 'dashboard.html'; // Navigera tillbaka till dashboard
-}
-
-// Visa gruppsidan
-function viewGroup(index) {
-    const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
-    const selectedGroup = existingGroups[index];
-    localStorage.setItem('selectedGroup', JSON.stringify(selectedGroup));
-    window.location.href = 'group-detail.html'; // Navigera till gruppdetaljer
-}
