@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Skapa träningsgrupp
+   // Skapa träningsgrupp
 document.getElementById('groupForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Förhindra att sidan laddas om
 
@@ -63,6 +63,10 @@ document.getElementById('groupForm').addEventListener('submit', function(event) 
     };
     existingGroups.push(newGroup);
     localStorage.setItem('groups', JSON.stringify(existingGroups));
+
+    // Omdirigera till grupplistan
+    window.location.href = 'group-list.html'; // Omdirigera till grupplista
+});
 
     // Visa bekräftelse
     document.getElementById('message').innerText = `Grupp "${groupName}" skapad av ${loggedInUser}!`;
