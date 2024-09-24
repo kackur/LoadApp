@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Inloggning
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Förhindra att sidan laddas om
+
+            const email = document.getElementById('email').value;
+            localStorage.setItem('loggedInUser', email); // Spara användarens e-post
+
+            // Omdirigera till skapa grupp-sidan
+            window.location.href = 'create-group.html'; 
+        });
+    }
+
     // Skapa konto
     const createAccountForm = document.getElementById('createAccountForm');
     if (createAccountForm) {
@@ -8,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('email').value;
             localStorage.setItem('loggedInUser', email); // Spara användarens e-post
 
-            // Omdirigera till skapa grupp-sidan
-            window.location.href = 'create-group.html'; 
+            // Omdirigera till grupplistan
+            window.location.href = 'group-list.html'; 
         });
     }
 
@@ -31,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('groups', JSON.stringify(existingGroups));
 
             // Omdirigera till grupplistan
-            window.location.href = 'group-list.html'; // Omdirigera till grupplista
+            window.location.href = 'group-list.html'; 
         });
     }
 
@@ -58,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedGroupName = localStorage.getItem('selectedGroupName');
         groupNameHeader.textContent = selectedGroupName;
         groupNameInput.value = selectedGroupName; // Sätta dolda input
+        loadTrainingSessions(); // Ladda träningspass för gruppen
     }
 
     // Skapa träningspass
@@ -78,35 +93,3 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             existingSessions.push(newSession);
             localStorage.setItem('trainingSessions', JSON.stringify(existingSessions));
-
-            // Visa träningspass
-            loadTrainingSessions();
-            trainingSessionForm.reset(); // Återställ formuläret
-        });
-    }
-
-    // Visa träningspass
-    function loadTrainingSessions() {
-        const sessionsList = document.getElementById('sessionsList');
-        sessionsList.innerHTML = ''; // Rensa befintliga poster
-
-        const existingSessions = JSON.parse(localStorage.getItem('trainingSessions')) || [];
-        existingSessions.forEach(session => {
-            if (session.group === groupNameInput.value) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${session.name}</td>
-                    <td>${session.date}</td>
-                    <td>${session.group}</td>
-                    <td>${session.createdBy}</td>
-                `;
-                sessionsList.appendChild(row);
-            }
-        });
-    }
-
-});
-
-// Funktion för att välja grupp
-function selectGroup(groupName) {
-    localStorage.setItem
