@@ -4,32 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gruppdetaljer</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css"> <!-- Se till att detta är rätt filnamn -->
 </head>
 <body>
-    <h1>Gruppdetaljer</h1>
-    <h2 id="groupName"></h2>
+    <h1 id="groupNameHeader">Träningsgrupp</h1>
 
-    <h3>Lägg till träningspass</h3>
-    <form id="trainingForm">
-        <label for="trainingDate">Datum:</label>
-        <input type="date" id="trainingDate" required>
-        <button type="submit">Skapa träningspass</button>
+    <form id="trainingSessionForm">
+        <input type="text" id="sessionName" placeholder="Träningspass namn" required>
+        <input type="date" id="sessionDate" required>
+        <input type="hidden" id="groupName" value="">
+        <button type="submit">Skapa Träningspass</button>
     </form>
-    
-    <h2>Träningspass för grupp: <span id="groupNameDetail"></span></h2>
-    <table>
+
+    <h2>Träningspass för gruppen</h2>
+    <table id="sessionsTable">
         <thead>
             <tr>
+                <th>Namn</th>
                 <th>Datum</th>
                 <th>Grupp</th>
-                <th>Skapad av</th>
+                <th>Skapat av</th>
             </tr>
         </thead>
-        <tbody id="trainingList"></tbody>
+        <tbody id="sessionsList"></tbody>
     </table>
 
-    <button onclick="goBack()">Tillbaka</button>
+    <button onclick="window.location.href='dashboard.html';">Tillbaka</button>
 
     <script src="script.js"></script>
 </body>
