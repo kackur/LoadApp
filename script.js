@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'dashboard.html';
     });
 
-    // Inloggningsformulär
+   // Inloggningsformulär
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Förhindra att sidan laddas om
 
@@ -31,11 +31,14 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     if (localStorage.getItem(loginEmail) === loginPassword) {
         document.getElementById('message').innerText = 'Inloggning lyckades!';
         
-        // Omdirigera till dashboard
-        window.location.href = 'dashboard.html'; // Se till att detta är rätt
+        // Använd setTimeout för att ge tid för meddelandet att visas
+        setTimeout(() => {
+            window.location.href = 'dashboard.html'; // Omdirigera till dashboard
+        }, 1000); // Väntar 1 sekund innan omdirigeringen
     } else {
         document.getElementById('message').innerText = 'Fel e-post eller lösenord.';
     }
 });
+
 
 });
