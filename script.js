@@ -47,4 +47,22 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('message').innerText = 'Fel e-post eller lösenord.';
         }
     });
+
+    // Skapa träningsgrupp
+    document.getElementById('groupForm')?.addEventListener('submit', function(event) {
+        event.preventDefault(); // Förhindra att sidan laddas om
+
+        const groupName = document.getElementById('groupName').value;
+
+        // Hämta befintliga grupper från localStorage
+        let groups = JSON.parse(localStorage.getItem('trainingGroups')) || [];
+        
+        // Lägg till den nya gruppen
+        groups.push(groupName);
+        
+        // Spara tillbaka till localStorage
+        localStorage.setItem('trainingGroups', JSON.stringify(groups));
+        
+        document.getElementById('groupMessage').innerText = `Träningsgrupp "${groupName}" skapad!`;
+    });
 });
