@@ -70,4 +70,16 @@ document.getElementById('groupForm').addEventListener('submit', function(event) 
     // Rensa formuläret
     document.getElementById('groupForm').reset();
 });
+
+    // Visa grupper
+document.addEventListener('DOMContentLoaded', function() {
+    const groupListElement = document.getElementById('groupList');
+    const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
+
+    existingGroups.forEach(group => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Grupp: ${group.name}, Skapad av: ${group.createdBy}`;
+        groupListElement.appendChild(listItem);
+    });
+});
 });
