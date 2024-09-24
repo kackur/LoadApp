@@ -46,3 +46,4 @@ document.addEventListener('DOMContentLoaded', function() {
         listItem.textContent = `Grupp: ${group.name}, Skapad av: ${group.createdBy}`;
         groupListElement.appendChild(listItem);
     });
+});
