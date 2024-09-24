@@ -40,16 +40,27 @@ document.addEventListener('DOMContentLoaded', function() {
     if (groupListElement) {
         const existingGroups = JSON.parse(localStorage.getItem('groups')) || [];
         
-        existingGroups.forEach(group => {
+        existingGroups.forEach((group, index) => {
             const row = document.createElement('tr');
             const groupNameCell = document.createElement('td');
             const createdByCell = document.createElement('td');
+            const actionCell = document.createElement('td'); // Ny cell för åtgärd
 
             groupNameCell.textContent = group.name;
             createdByCell.textContent = group.createdBy;
 
+            // Skapa "Visa"-knappen
+            const viewButton = document.createElement('button');
+            viewButton.textContent = 'Visa';
+            viewButton.onclick = function() {
+                localStorage.setItem('currentGroupIndex', index); // Spara gruppindexet
+                window.location.href = 'group-detail.html'; // Navigera till gruppdetaljsidan
+            };
+
+            actionCell.appendChild(viewButton); // Lägg till knappen i åtgärdscellen
             row.appendChild(groupNameCell);
             row.appendChild(createdByCell);
+            row.appendChild(actionCell); // Lägg till åtgärdscellen i raden
             groupListElement.appendChild(row);
         });
     }
