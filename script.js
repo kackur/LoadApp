@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Hämta gruppnamn från URL eller Local Storage och visa det
+    // Hämta gruppnamn från Local Storage
     const groupName = localStorage.getItem('selectedGroupName') || "Ingen grupp vald";
     document.getElementById('groupNameHeader').textContent = groupName;
     document.getElementById('groupName').value = groupName; // Dölja gruppnamn i formuläret
@@ -12,9 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const sessionName = document.getElementById('sessionName').value; // Hämta träningspass namn
             const sessionDate = document.getElementById('sessionDate').value; // Hämta datum
-            const groupName = document.getElementById('groupName').value; // Hämta gruppnamn
-
-            if (sessionName && sessionDate && groupName) {
+            
+            if (sessionName && sessionDate) {
                 const existingSessions = JSON.parse(localStorage.getItem('trainingSessions')) || [];
                 const newSession = {
                     name: sessionName,
