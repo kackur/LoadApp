@@ -21,19 +21,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Inloggningsformulär
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Förhindra att sidan laddas om
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Förhindra att sidan laddas om
 
-        const loginEmail = document.getElementById('loginEmail').value;
-        const loginPassword = document.getElementById('loginPassword').value;
+    const loginEmail = document.getElementById('loginEmail').value;
+    const loginPassword = document.getElementById('loginPassword').value;
 
-        // Kontrollera om användaren finns och lösenordet är korrekt
-        if (localStorage.getItem(loginEmail) === loginPassword) {
-            document.getElementById('message').innerText = 'Inloggning lyckades!';
-            // Omdirigera till dashboard
-            window.location.href = 'dashboard.html';
-        } else {
-            document.getElementById('message').innerText = 'Fel e-post eller lösenord.';
-        }
-    });
+    // Kontrollera om användaren finns och lösenordet är korrekt
+    if (localStorage.getItem(loginEmail) === loginPassword) {
+        document.getElementById('message').innerText = 'Inloggning lyckades!';
+        
+        // Omdirigera till dashboard
+        window.location.href = 'dashboard.html'; // Se till att detta är rätt
+    } else {
+        document.getElementById('message').innerText = 'Fel e-post eller lösenord.';
+    }
+});
+
 });
