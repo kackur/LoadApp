@@ -3,47 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoadApp - Grupper</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .new-group-button, .back-button {
-            margin: 10px 0;
-            padding: 10px 15px;
-        }
-        .new-group-button {
-            float: right;
-        }
-    </style>
+    <title>Grupplista</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Grupplista</h1>
-
-    <button class="new-group-button" onclick="window.location.href='create-group.html'">Ny Grupp</button>
-    <button class="back-button" onclick="window.location.href='dashboard.html'">Tillbaka till Dashboard</button>
-
-    <h2>Lista över grupper</h2>
+    <button onclick="window.location.href='dashboard.html'">Tillbaka till Dashboard</button>
+    
     <table>
         <thead>
             <tr>
-                <th>Gruppens namn</th>
+                <th>Gruppnamn</th>
                 <th>Skapad av</th>
-                <th>Åtgärd</th> <!-- Ny kolumn för knappen -->
+                <th>Åtgärder</th> <!-- Ny kolumn för knappar -->
             </tr>
         </thead>
-        <tbody id="groupList"></tbody>
+        <tbody id="groupList">
+            <!-- Grupper kommer att läggas till här via JavaScript -->
+        </tbody>
     </table>
+    
+    <button onclick="window.location.href='create-group.html'" style="float: right;">Ny grupp</button>
 
     <script src="script.js"></script>
 </body>
