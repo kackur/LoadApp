@@ -6,7 +6,14 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h1>Välkommen till Dashboard!</h1>
-    <p>Här kan du skapa träningsgrupper och lägga upp träningspass.</p>
+    <h1>Välkommen till Dashboard</h1>
+    <button id="createGroupBtn">Skapa ny träningsgrupp</button>
+
+    <script>
+        // Navigera till create-group.html när knappen klickas
+        document.getElementById('createGroupBtn').addEventListener('click', function() {
+            window.location.href = 'create-group.html';
+        });
+    </script>
 </body>
 </html>
