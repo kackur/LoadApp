@@ -3,37 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoadApp - Gruppdetaljer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .back-button {
-            margin: 10px 0;
-            padding: 10px 15px;
-        }
-        .training-session-form {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Gruppdetaljer</title>
 </head>
 <body>
-    <h1 id="groupName"></h1>
-    
-    <button class="back-button" onclick="window.location.href='group-list.html'">Tillbaka</button>
+    <h1 id="groupTitle"></h1>
+    <button onclick="window.location.href='group-list.html'">Tillbaka</button>
 
     <h2>Lägg till träningspass</h2>
-    <form id="trainingSessionForm" class="training-session-form">
-        <label for="sessionDate">Datum:</label>
-        <input type="date" id="sessionDate" required>
-        <label for="sessionDescription">Beskrivning:</label>
-        <textarea id="sessionDescription" required></textarea>
-        <button type="submit">Lägg till träningspass</button>
+    <form id="trainingSessionForm">
+        <label for="sessionName">Träningspassets namn:</label>
+        <input type="text" id="sessionName" required>
+        <button type="submit">Lägg till pass</button>
     </form>
 
     <h2>Träningspass</h2>
-    <ul id="trainingSessionsList"></ul>
+    <ul id="sessionList"></ul>
 
-    <script src="script.js"></script>
+    <script src="group-detail.js"></script>
 </body>
 </html>
