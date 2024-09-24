@@ -3,19 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>LoadApp - Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .new-group-button {
+            float: right;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Välkommen till Dashboard</h1>
-    <button id="createGroupBtn">Skapa ny träningsgrupp</button>
-<br>
-    <a href="group-list.html">Visa Grupplista</a>
+    <h1>Välkommen till LoadApp!</h1>
+    
+    <button class="new-group-button" onclick="window.location.href='create-group.html'">Ny Grupp</button>
+    
+    <h2>Grupplista</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Gruppens namn</th>
+                <th>Skapad av</th>
+            </tr>
+        </thead>
+        <tbody id="groupList"></tbody>
+    </table>
 
-    <script>
-        // Navigera till create-group.html när knappen klickas
-        document.getElementById('createGroupBtn').addEventListener('click', function() {
-            window.location.href = 'create-group.html';
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
